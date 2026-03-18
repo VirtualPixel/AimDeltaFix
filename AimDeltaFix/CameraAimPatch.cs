@@ -42,16 +42,11 @@ namespace AimDeltaFix
         // which feels like lower mouse sensitivity even though the math converges
         // over time.
         //
-        // Fix: when smoothing is off (num3 >= 40), snap directly to target.
+        // Fix: when smoothing is off, snap directly to target.
         // When smoothing is on, use exponential decay for frame-rate independence.
         public static float FixLerpFactor(float t)
         {
-            float dt = Time.deltaTime;
-            if (dt <= 0f) return t;
-
-            float num3 = t / dt;
-
-            if (num3 >= 40f)
+            if (GameplayManager.instance.cameraSmoothing <= 0f)
                 return 1f;
 
             return 1f - Mathf.Exp(-t);

@@ -17,3 +17,5 @@ The issue is on line 213 of `CameraAim.Update()`. Easiest fix for smoothing off 
 ## Credit
 
 Bug originally spotted by MiahTRT.
+
+1A3 Jenson's suggestion to fix the threshold.
