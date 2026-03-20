@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace AimDeltaFix
 {
-    [BepInPlugin("Vippy.AimDeltaFix", "AimDeltaFix", "1.0.0")]
+    [BepInPlugin("Vippy.AimDeltaFix", "AimDeltaFix", "1.0.2")]
     public class AimDeltaFix : BaseUnityPlugin
     {
         internal Harmony? Harmony { get; set; }

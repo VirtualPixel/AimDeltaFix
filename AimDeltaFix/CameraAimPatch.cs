@@ -20,6 +20,9 @@ namespace AimDeltaFix
                     counter++;
                     if (counter == 2)
                     {
+                        yield return new CodeInstruction(OpCodes.Ldarg_0);
+                        yield return new CodeInstruction(OpCodes.Ldfld,
+                            AccessTools.Field(typeof(CameraAim), "overrideAimSmoothTimer"));
                         // Inject our fix right before the second Quaternion.Lerp call.
                         // This modifies the lerp factor (num3 * Time.deltaTime) on the stack
                         // to be frame-rate independent before it's passed to Lerp.
@@ -42,11 +45,11 @@ namespace AimDeltaFix
         // which feels like lower mouse sensitivity even though the math converges
         // over time.
         //
-        // Fix: when smoothing is off, snap directly to target.
+        // Fix: when smoothing is off, snap directly to target unless overrideAimSmoothTimer is present.
         // When smoothing is on, use exponential decay for frame-rate independence.
-        public static float FixLerpFactor(float t)
+        public static float FixLerpFactor(float t, float overrideAimSmoothTimer)
         {
-            if (GameplayManager.instance.cameraSmoothing <= 0f)
+            if (GameplayManager.instance.cameraSmoothing <= 0f && overrideAimSmoothTimer <= 0f)
                 return 1f;
 
             return 1f - Mathf.Exp(-t);

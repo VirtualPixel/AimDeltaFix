@@ -8,7 +8,7 @@ The camera smoothing in `CameraAim.Update()` uses `Quaternion.Lerp(current, targ
 
 ## How this fixes it
 
-When camera smoothing is off, the lerp is skipped entirely — the camera just snaps to your aim target regardless of FPS. When smoothing is on, the lerp factor is replaced with `1 - Exp(-num3 * Time.deltaTime)` which gives proper frame-rate independent exponential decay.
+When camera smoothing is off and no override is active, the lerp is skipped entirely — the camera just snaps to your aim target regardless of FPS. When smoothing is on, the lerp factor is replaced with `1 - Exp(-num3 * Time.deltaTime)` which gives proper frame-rate independent exponential decay.
 
 ## Dev fix
 
@@ -16,6 +16,5 @@ The issue is on line 213 of `CameraAim.Update()`. Easiest fix for smoothing off 
 
 ## Credit
 
-Bug originally spotted by MiahTRT.
-
-1A3 Jenson's suggestion to fix the threshold.
+- Bug originally spotted by MiahTRT
+- 1A3 Jenson's suggestion to fix the threshold
